@@ -32,7 +32,9 @@ import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
-
+/*
+updates
+ */
 public class MainActivity extends AppCompatActivity {
 
     // COMPLETED (33) Delete mWeatherTextView
