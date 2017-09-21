@@ -70,24 +70,24 @@ public class MainActivity extends AppCompatActivity {
          */
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        // COMPLETED (41) Set the layoutManager on mRecyclerView
+        // COMPLETED (39) Set the layoutManager on mRecyclerView
         mRecyclerView.setLayoutManager(layoutManager);
 
-        // COMPLETED (42) Use setHasFixedSize(true) on mRecyclerView to designate that all items in the list will have the same size
+        // COMPLETED (40) Use setHasFixedSize(true) on mRecyclerView to designate that all items in the list will have the same size
         /*
          * Use this setting to improve performance if you know that changes in content do not
          * change the child layout size in the RecyclerView
          */
         mRecyclerView.setHasFixedSize(true);
 
-        // COMPLETED (43) set mForecastAdapter equal to a new ForecastAdapter
+        // COMPLETED (41) set mForecastAdapter equal to a new ForecastAdapter
         /*
          * The ForecastAdapter is responsible for linking our weather data with the Views that
          * will end up displaying our weather data.
          */
         mForecastAdapter = new ForecastAdapter();
 
-        // COMPLETED (44) Use mRecyclerView.setAdapter and pass in mForecastAdapter
+        // COMPLETED (42) Use mRecyclerView.setAdapter and pass in mForecastAdapter
         /* Setting the adapter attaches it to the RecyclerView in our layout. */
         mRecyclerView.setAdapter(mForecastAdapter);
 
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     private void showWeatherDataView() {
         /* First, make sure the error is invisible */
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
-        // COMPLETED (44) Show mRecyclerView, not mWeatherTextView
+        // COMPLETED (43) Show mRecyclerView, not mWeatherTextView
         /* Then, make sure the weather data is visible */
         mRecyclerView.setVisibility(View.VISIBLE);
     }
