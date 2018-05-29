@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +39,7 @@ import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
 
@@ -221,8 +224,30 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             return true;
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
-
+        // TODO completed (2) Launch the map when the map menu item is clicked
+        if (id == R.id.action_open_map) {
+            String mLocation = SunshinePreferences.getPreferredWeatherLocation(this);
+            openMap(mLocation);
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openMap(String mAddressString) {
+        String mScheme = "geo";
+        String mPath = "0,0";
+//        mAddressString = "101 S LeSueur, Mesa, AZ";
+        String mQueryKey = "q";
+
+        Uri mLocationUri = new Uri.Builder()
+                .scheme(mScheme)
+                .appendPath(mPath)
+                .appendQueryParameter(mQueryKey, mAddressString)
+                .build();
+
+        Intent intentShowMap = new Intent(Intent.ACTION_VIEW);
+        intentShowMap.setData(mLocationUri);
+
+        if (intentShowMap.resolveActivity(getPackageManager()) != null)
+            startActivity(intentShowMap);
     }
 }
