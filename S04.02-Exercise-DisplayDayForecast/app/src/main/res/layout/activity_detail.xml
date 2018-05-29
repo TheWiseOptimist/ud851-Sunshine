@@ -3,4 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/detail_text_view"
+        style="@style/TextAppearance.AppCompat.Display2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp" />
 </FrameLayout>
