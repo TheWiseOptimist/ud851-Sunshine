@@ -28,5 +28,6 @@
         android:id="@+id/action_open_map"
         android:orderInCategory="2"
         android:title="@string/openMap"
+        android:icon="@android:drawable/ic_dialog_map"
         app:showAsAction="ifRoom" />
 </menu>

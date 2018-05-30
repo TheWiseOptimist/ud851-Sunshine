@@ -36,31 +36,48 @@ public class DetailActivity extends AppCompatActivity {
     // TODO completed (3) Create a menu with an item with id of action_share
     // TODO completed (4) Display the menu and implement the forecast sharing functionality
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.detail_forecast, menu);
-        return true;
-    }
+    // My original approach
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.detail_forecast, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.action_share) {
+//            shareWeatherDetail();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+//
+//    private void shareWeatherDetail() {
+//        String mimeType = "text/plain";
+//        String title = "Share the Weather";
+//        String subject = "Weather Info";
+//        ShareCompat.IntentBuilder.from(this)
+//                .setType(mimeType)
+//                .setText(mForecast + FORECAST_SHARE_HASHTAG)
+//                .setChooserTitle(title)
+//                .setSubject(subject)
+//                .startChooser();
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_share) {
-            shareWeatherDetail();
+        // modified Udacity approach
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            getMenuInflater().inflate(R.menu.detail_forecast, menu);
+            MenuItem menuItem = menu.findItem(R.id.action_share);
+            menuItem.setIntent(
+                    ShareCompat.IntentBuilder.from(this)
+                            .setType("plain/text")
+                            .setText(mForecast + FORECAST_SHARE_HASHTAG)
+                            .setSubject("Weather Info")
+                            .getIntent()
+            );
+            return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
 
-    private void shareWeatherDetail() {
-        String mimeType = "text/plain";
-        String title = "Share the Weather";
-        ShareCompat.IntentBuilder.from(this)
-                .setType(mimeType)
-                .setText(mForecast)
-                .setChooserTitle(title)
-                .setSubject("Weather Info")
-                .startChooser();
+
     }
-}

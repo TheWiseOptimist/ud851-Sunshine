@@ -226,15 +226,15 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
 
         // TODO completed (2) Launch the map when the map menu item is clicked
         if (id == R.id.action_open_map) {
-            String mLocation = SunshinePreferences.getPreferredWeatherLocation(this);
-            openMap(mLocation);
+            openMap();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void openMap(String mAddressString) {
+    private void openMap() {
         String mScheme = "geo";
         String mPath = "0,0";
+        String mAddressString = SunshinePreferences.getPreferredWeatherLocation(this);
 //        mAddressString = "101 S LeSueur, Mesa, AZ";
         String mQueryKey = "q";
 
