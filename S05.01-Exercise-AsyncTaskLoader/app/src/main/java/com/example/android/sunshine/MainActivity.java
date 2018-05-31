@@ -324,7 +324,7 @@ public class MainActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        // TODO (5) Refactor the refresh functionality to work with our AsyncTaskLoader
+        // TODO completed (5) Refactor the refresh functionality to work with our AsyncTaskLoader
         if (id == R.id.action_refresh) {
             mForecastAdapter.setWeatherData(null);
             getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID, null, this);
