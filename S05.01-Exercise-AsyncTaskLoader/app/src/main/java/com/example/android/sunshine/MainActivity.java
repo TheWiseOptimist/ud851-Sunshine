@@ -20,6 +20,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +44,9 @@ import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 import java.net.URL;
 
 // TODO (1) Implement the proper LoaderCallbacks interface and the methods of that interface
-public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
+public class MainActivity
+        extends AppCompatActivity
+        implements ForecastAdapterOnClickHandler, LoaderManager.LoaderCallbacks<String> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -49,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
+
+    private static final int LOADER_ID = 58;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,52 +171,93 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
-    // TODO (6) Remove any and all code from MainActivity that references FetchWeatherTask
-    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+    @NonNull
+    @Override
+    public Loader<String> onCreateLoader(int id, @Nullable Bundle args) {// TODO: 5/30/18
+        return new AsyncTaskLoader<String>(this) {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mLoadingIndicator.setVisibility(View.VISIBLE);
-        }
 
-        @Override
-        protected String[] doInBackground(String... params) {
+            @Override
+            protected void onStartLoading() {
+                super.onStartLoading();
+                mLoadingIndicator.setVisibility(View.VISIBLE);
+            }
 
-            /* If there's no zip code, there's nothing to look up. */
-            if (params.length == 0) {
+            @Nullable
+            @Override
+            public String loadInBackground() {
                 return null;
             }
 
-            String location = params[0];
-            URL weatherRequestUrl = NetworkUtils.buildUrl(location);
-
-            try {
-                String jsonWeatherResponse = NetworkUtils
-                        .getResponseFromHttpUrl(weatherRequestUrl);
-
-                String[] simpleJsonWeatherData = OpenWeatherJsonUtils
-                        .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
-
-                return simpleJsonWeatherData;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
+            @Override
+            public void deliverResult(@Nullable String data) {
+                super.deliverResult(data);
             }
-        }
+        };
+    }
 
-        @Override
-        protected void onPostExecute(String[] weatherData) {
-            mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (weatherData != null) {
-                showWeatherDataView();
-                mForecastAdapter.setWeatherData(weatherData);
-            } else {
-                showErrorMessage();
-            }
+    @Override
+    public void onLoadFinished(@NonNull Loader<String> loader, String data) {
+        mLoadingIndicator.setVisibility(View.INVISIBLE);
+        if (data != null) {
+            showWeatherDataView();
+            mForecastAdapter.setWeatherData(weatherData);
+        } else {
+            showErrorMessage();
         }
     }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<String> loader) {
+
+    }
+
+    // TODO completed (6) Remove any and all code from MainActivity that references FetchWeatherTask
+//    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            mLoadingIndicator.setVisibility(View.VISIBLE);
+//        }
+//
+//        @Override
+//        protected String[] doInBackground(String... params) {
+//
+//            /* If there's no zip code, there's nothing to look up. */
+//            if (params.length == 0) {
+//                return null;
+//            }
+//
+//            String location = params[0];
+//            URL weatherRequestUrl = NetworkUtils.buildUrl(location);
+//
+//            try {
+//                String jsonWeatherResponse = NetworkUtils
+//                        .getResponseFromHttpUrl(weatherRequestUrl);
+//
+//                String[] simpleJsonWeatherData = OpenWeatherJsonUtils
+//                        .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
+//
+//                return simpleJsonWeatherData;
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                return null;
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String[] weatherData) {
+//            mLoadingIndicator.setVisibility(View.INVISIBLE);
+//            if (weatherData != null) {
+//                showWeatherDataView();
+//                mForecastAdapter.setWeatherData(weatherData);
+//            } else {
+//                showErrorMessage();
+//            }
+//        }
+//    }
 
     /**
      * This method uses the URI scheme for showing a location found on a
@@ -215,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
      * page of Android's developer site:
      *
      * @see <a"http://developer.android.com/guide/components/intents-common.html#Maps">
-     *
+     * <p>
      * Hint: Hold Command on Mac or Control on Windows and click that link
      * to automagically open the Common Intents page
      */
