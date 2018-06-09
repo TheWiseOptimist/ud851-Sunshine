@@ -22,18 +22,17 @@ import android.widget.TextView;
 
 // Do steps 5 - 11 within SettingsFragment
 
-// TODO completed (5) Override onCreatePreferences and add the preference xml file using addPreferencesFromResource
-
 public class SettingsFragment
-        extends PreferenceFragmentCompat implements
-        SharedPreferences.OnSharedPreferenceChangeListener,
-        Preference.OnPreferenceChangeListener {
-
+        extends PreferenceFragmentCompat
+        implements SharedPreferences.OnSharedPreferenceChangeListener
+//        , Preference.OnPreferenceChangeListener
+{
 
     public SettingsFragment() {
         // Required empty public constructor
     }
 
+    // TODO completed (5) Override onCreatePreferences and add the preference xml file using addPreferencesFromResource
     // Do step 9 within onCreatePreference
     // TODO completed (9) Set the preference summary on each preference that isn't a CheckBoxPreference
     @Override
@@ -48,7 +47,7 @@ public class SettingsFragment
                 setPreferenceSummary(preference,
                         sharedPreferences.getString(preference.getKey(), ""));
             }
-            preference.setOnPreferenceChangeListener(this);
+//            preference.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -57,7 +56,8 @@ public class SettingsFragment
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference preference = findPreference(key);
-        if (preference != null) {
+        if (preference != null
+                && (!(preference instanceof CheckBoxPreference))) {
             setPreferenceSummary(preference,
                     sharedPreferences.getString(preference.getKey(), ""));
         }
@@ -88,10 +88,10 @@ public class SettingsFragment
                 .unregisterOnSharedPreferenceChangeListener(SettingsFragment.this);
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
-    }
+//    @Override
+//    public boolean onPreferenceChange(Preference preference, Object newValue) {
+//        return false;
+//    }
 
     // TODO completed (8) Create a method called setPreferenceSummary that accepts a Preference and an Object and sets the summary of the preference
     private void setPreferenceSummary(Preference preference, Object object) {
