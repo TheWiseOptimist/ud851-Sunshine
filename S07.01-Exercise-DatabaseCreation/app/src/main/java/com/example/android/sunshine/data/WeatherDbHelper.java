@@ -15,19 +15,67 @@
  */
 package com.example.android.sunshine.data;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
+
+import static android.provider.BaseColumns._ID;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_DATE;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_DEGREES;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_HUMIDITY;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_MAX_TEMP;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_MIN_TEMP;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_PRESSURE;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_WEATHER_ID;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.COLUMN_WIND_SPEED;
+import static com.example.android.sunshine.data.WeatherContract.WeatherEntry.TABLE_NAME;
+
 /**
  * Manages a local database for weather data.
  */
-// TODO (11) Extend SQLiteOpenHelper from WeatherDbHelper
-public class WeatherDbHelper {
+// TODO completed (11) Extend SQLiteOpenHelper from WeatherDbHelper
+public class WeatherDbHelper extends SQLiteOpenHelper {
 
-//  TODO (12) Create a public static final String called DATABASE_NAME with value "weather.db"
+    //  TODO completed (12) Create a public static final String called DATABASE_NAME with value "weather.db"
+    private static final String DATABASE_NAME = "weather.db";
 
-//  TODO (13) Create a private static final int called DATABASE_VERSION and set it to 1
+    //  TODO completed (13) Create a private static final int called DATABASE_VERSION and set it to 1
+    private static final int DATABASE_VERSION = 1;
 
-//  TODO (14) Create a constructor that accepts a context and call through to the superclass constructor
+    //  TODO completed (14) Create a constructor that accepts a context and call through to the superclass constructor
+    public WeatherDbHelper(@Nullable Context context) {
+        super(context,
+                DATABASE_NAME,
+                null,
+                DATABASE_VERSION);
+    }
 
-//  TODO (15) Override onCreate and create the weather table from within it
+    //  TODO (15) Override onCreate and create the weather table from within it
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        final String CREATE_WEATHER_TABLE =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        COLUMN_DATE + " TEXT NOT NULL, " +
+                        COLUMN_WEATHER_ID + " INTEGER NOT NULL, " +
+                        COLUMN_MIN_TEMP + " DOUBLE NOT NULL, " +
+                        COLUMN_MAX_TEMP + " DOUBLE NOT NULL, " +
+                        COLUMN_HUMIDITY + " DOUBLE NOT NULL, " +
+                        COLUMN_PRESSURE + " DOUBLE NOT NULL, " +
+                        COLUMN_WIND_SPEED + " DOUBLE NOT NULL, " +
+                        COLUMN_DEGREES + " DOUBLE NOT NULL" +
+                        "); ";
+        db.execSQL(CREATE_WEATHER_TABLE);
+    }
 
-//  TODO (16) Override onUpgrade, but don't do anything within it yet
+    //  TODO completed (16) Override onUpgrade, but don't do anything within it yet
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+
+    }
+
+
 }
