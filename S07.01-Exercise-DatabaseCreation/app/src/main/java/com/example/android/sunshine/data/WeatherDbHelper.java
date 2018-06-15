@@ -51,7 +51,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 DATABASE_VERSION);
     }
 
-    //  TODO (15) Override onCreate and create the weather table from within it
+    //  TODO completed (15) Override onCreate and create the weather table from within it
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String CREATE_WEATHER_TABLE =
