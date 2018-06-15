@@ -32,7 +32,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
      */
     public static final String DATABASE_NAME = "weather.db";
 
-//  TODO completed (2) Increment the database version after changing the create table statement
+    //  TODO completed (2) Increment the database version after changing the create table statement
     /*
      * If you change the database schema, you must increment the database version or the onUpgrade
      * method will not be called.
@@ -67,27 +67,32 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
                 "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
 
-                /*
-                 * WeatherEntry did not explicitly declare a column called "_ID". However,
-                 * WeatherEntry implements the interface, "BaseColumns", which does have a field
-                 * named "_ID". We use that here to designate our table's primary key.
-                 */
-                WeatherEntry._ID               + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        /*
+                         * WeatherEntry did not explicitly declare a column called "_ID". However,
+                         * WeatherEntry implements the interface, "BaseColumns", which does have a field
+                         * named "_ID". We use that here to designate our table's primary key.
+                         */
+                        WeatherEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 
-                WeatherEntry.COLUMN_DATE       + " INTEGER UNIQUE NOT NULL, "                 +
+                        // left out ON CONFLICT REPLACE
+//                        WeatherEntry.COLUMN_DATE + " INTEGER UNIQUE NOT NULL, " +
 
-                WeatherEntry.COLUMN_WEATHER_ID + " INTEGER NOT NULL, "                 +
+                        WeatherEntry.COLUMN_DATE + " INTEGER UNIQUE ON CONFLICT REPLACE NOT NULL, " +
 
-                WeatherEntry.COLUMN_MIN_TEMP   + " REAL NOT NULL, "                    +
-                WeatherEntry.COLUMN_MAX_TEMP   + " REAL NOT NULL, "                    +
 
-                WeatherEntry.COLUMN_HUMIDITY   + " REAL NOT NULL, "                    +
-                WeatherEntry.COLUMN_PRESSURE   + " REAL NOT NULL, "                    +
+                        WeatherEntry.COLUMN_WEATHER_ID + " INTEGER NOT NULL, " +
 
-                WeatherEntry.COLUMN_WIND_SPEED + " REAL NOT NULL, "                    +
-                WeatherEntry.COLUMN_DEGREES    + " REAL NOT NULL" + ");";
+                        WeatherEntry.COLUMN_MIN_TEMP + " REAL NOT NULL, " +
+                        WeatherEntry.COLUMN_MAX_TEMP + " REAL NOT NULL, " +
 
-//              TODO completed (1) Add a UNIQUE constraint on the date column to replace on conflict
+                        WeatherEntry.COLUMN_HUMIDITY + " REAL NOT NULL, " +
+                        WeatherEntry.COLUMN_PRESSURE + " REAL NOT NULL, " +
+
+                        WeatherEntry.COLUMN_WIND_SPEED + " REAL NOT NULL, " +
+                        WeatherEntry.COLUMN_DEGREES + " REAL NOT NULL" + ");";
+
+        // TODO completed (1) Add a UNIQUE constraint on the date column to replace on conflict
+        // Class solution used separate constraint, rather than changing the table definition
 
         /*
          * After we've spelled out our SQLite table creation statement above, we actually execute
