@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
          * do things like set the adapter of the RecyclerView and toggle the visibility.
          */
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_forecast);
+        mRecyclerView = findViewById(R.id.recyclerview_forecast);
 
         /*
          * The ProgressBar that will indicate to the user that we are loading data. It will be
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements
          * Please note: This so called "ProgressBar" isn't a bar by default. It is more of a
          * circle. We didn't make the rules (or the names of Views), we just follow them.
          */
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+        mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
         /*
          * A LinearLayoutManager is responsible for measuring and positioning item views within a
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements
 
     /**
      * Called when a Loader has finished loading its data.
-     *
+     * <p>
      * NOTE: There is one small bug in this code. If no data is present in the cursor do to an
      * initial load being performed with no access to internet, the loading indicator will show
      * indefinitely, until data is present from the ContentProvider. This will be fixed in a
@@ -235,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
 
         mForecastAdapter.swapCursor(data);
         if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
@@ -259,6 +258,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     //  TODO (38) Refactor onClick to accept a long instead of a String as its parameter
+
     /**
      * This method is for responding to clicks from our list.
      *
@@ -306,10 +306,8 @@ public class MainActivity extends AppCompatActivity implements
      * This is where we inflate and set up the menu for this Activity.
      *
      * @param menu The options menu in which you place your items.
-     *
      * @return You must return true for the menu to be displayed;
-     *         if you return false it will not be shown.
-     *
+     * if you return false it will not be shown.
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
@@ -327,7 +325,6 @@ public class MainActivity extends AppCompatActivity implements
      * Callback invoked when a menu item was selected from this Activity's menu.
      *
      * @param item The menu item that was selected by the user
-     *
      * @return true if you handle the menu click here, false otherwise
      */
     @Override
