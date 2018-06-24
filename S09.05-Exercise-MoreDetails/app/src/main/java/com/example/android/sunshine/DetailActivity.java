@@ -30,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
@@ -261,6 +262,7 @@ public class DetailActivity extends AppCompatActivity
         );
         mWeatherPressure.setText(displayPressure);
 
+
         //  TODO completed (33) Store a forecast summary in mForecastSummary
         mForecastSummary = displayDate + "\n" +
                 displayDescription + "\n" +
@@ -269,6 +271,9 @@ public class DetailActivity extends AppCompatActivity
                 displayHumidity + "\n" +
                 displayWindSpeedAndDirection + "\n" +
                 displayPressure;
+
+        Toast.makeText(this, mForecastSummary, Toast.LENGTH_SHORT).show();// TODO: 6/23/18
+
     }
 
     //  TODO completed (34) Override onLoaderReset, but don't do anything in it yet

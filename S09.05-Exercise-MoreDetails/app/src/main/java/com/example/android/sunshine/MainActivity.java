@@ -36,6 +36,7 @@ import android.widget.ProgressBar;
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.FakeDataUtils;
+import com.example.android.sunshine.utilities.SunshineDateUtils;
 
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>,
@@ -257,20 +258,19 @@ public class MainActivity extends AppCompatActivity implements
         mForecastAdapter.swapCursor(null);
     }
 
-    //  TODO (38) Refactor onClick to accept a long instead of a String as its parameter
 
     /**
-     * This method is for responding to clicks from our list.
-     *
-     * @param weatherForDay String describing weather details for a particular day
+     * @param weatherDate
      */
+    //  TODO completed (38) Refactor onClick to accept a long instead of a String as its parameter
     @Override
-    public void onClick(String weatherForDay) {
-//      TODO (39) Refactor onClick to build a URI for the clicked date and and pass it with the Intent using setData
+    public void onClick(long weatherDate) {
+        //  TODO completed (39) Refactor onClick to build a URI for the clicked date and and pass it with the Intent using setData
         Context context = this;
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, weatherForDay);
+        Uri data = Uri.parse(SunshineDateUtils.getFriendlyDateString(context, weatherDate, true));
+        intentToStartDetailActivity.setData(data);
         startActivity(intentToStartDetailActivity);
     }
 
@@ -343,4 +343,6 @@ public class MainActivity extends AppCompatActivity implements
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
