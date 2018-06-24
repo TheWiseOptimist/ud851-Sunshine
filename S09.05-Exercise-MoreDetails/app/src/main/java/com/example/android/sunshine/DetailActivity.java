@@ -81,13 +81,13 @@ public class DetailActivity extends AppCompatActivity
     //  TODO completed (10) Remove the mWeatherDisplay TextView declaration
 
     //  TODO completed (11) Declare TextViews for the date, description, high, low, humidity, wind, and pressure
-    private TextView mWeatherDate;
-    private TextView mWeatherDescription;
-    private TextView mWeatherHigh;
-    private TextView mWeatherLow;
-    private TextView mWeatherHumidity;
-    private TextView mWeatherPressure;
-    private TextView mWeatherWind;
+    private TextView mWeatherDateView;
+    private TextView mWeatherDescriptionView;
+    private TextView mWeatherHighView;
+    private TextView mWeatherLowView;
+    private TextView mWeatherHumidityView;
+    private TextView mWeatherPressureView;
+    private TextView mWeatherWindView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +96,13 @@ public class DetailActivity extends AppCompatActivity
         //  TODO completed (12) Remove mWeatherDisplay TextView
 
         //  TODO completed (13) Find each of the TextViews by ID
-        mWeatherDate = findViewById(R.id.tv_selected_date);
-        mWeatherDescription = findViewById(R.id.tv_selected_weather_description);
-        mWeatherHigh = findViewById(R.id.tv_selected_max_temp);
-        mWeatherLow = findViewById(R.id.tv_selected_min_temp);
-        mWeatherHumidity = findViewById(R.id.tv_selected_humidity);
-        mWeatherPressure = findViewById(R.id.tv_selected_pressure);
-        mWeatherWind = findViewById(R.id.tv_selected_wind);
+        mWeatherDateView = findViewById(R.id.tv_selected_date);
+        mWeatherDescriptionView = findViewById(R.id.tv_selected_weather_description);
+        mWeatherHighView = findViewById(R.id.tv_selected_max_temp);
+        mWeatherLowView = findViewById(R.id.tv_selected_min_temp);
+        mWeatherHumidityView = findViewById(R.id.tv_selected_humidity);
+        mWeatherPressureView = findViewById(R.id.tv_selected_pressure);
+        mWeatherWindView = findViewById(R.id.tv_selected_wind);
 
         //  TODO completed (14) Remove the code that checks for extra text
         //  TODO completed (16) Use getData to get a reference to the URI passed with this Activity's Intent
@@ -188,13 +188,20 @@ public class DetailActivity extends AppCompatActivity
         switch (id) {
             case ID_DETAIL_LOADER:
 
-                long normalizedUtcNow = SunshineDateUtils.normalizeDate(System.currentTimeMillis());
-                String mSelection = WeatherContract.WeatherEntry.COLUMN_DATE + " = " + normalizedUtcNow;
+//                long normalizedUtcNow = SunshineDateUtils.normalizeDate(System.currentTimeMillis());
+//                String mSelection = WeatherContract.WeatherEntry.COLUMN_DATE + " = " + normalizedUtcNow;
+//
+//                return new CursorLoader(this,
+//                        mUri,
+//                        DETAIL_FORECAST_PROJECTION,
+//                        mSelection,
+//                        null,
+//                        null);
 
                 return new CursorLoader(this,
                         mUri,
                         DETAIL_FORECAST_PROJECTION,
-                        mSelection,
+                        null,
                         null,
                         null);
             default:
@@ -207,18 +214,19 @@ public class DetailActivity extends AppCompatActivity
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         //  TODO completed (25) Check before doing anything that the Cursor has valid data
         if (data == null) return;
+        data.moveToFirst();
 
         //  TODO completed (26) Display a readable date string // said "data" instead of "date"
         String displayDate = SunshineDateUtils.getFriendlyDateString(this,
                 data.getLong(INDEX_SELECTED_WEATHER_DATE),
                 true);
-        mWeatherDate.setText(displayDate);
+        mWeatherDateView.setText(displayDate);
 
         //  TODO completed (27) Display the weather description (using SunshineWeatherUtils)
         String displayDescription = getResources().getString(R.string.a11y_forecast,
                 SunshineWeatherUtils.getStringForWeatherCondition(this,
                         data.getInt(INDEX_SELECTED_WEATHER_CONDITIONS_ID)));
-        mWeatherDescription.setText(displayDescription);
+        mWeatherDescriptionView.setText(displayDescription);
 
         //  TODO completed (28) Display the high temperature
         String displayHigh = getResources().getString(
@@ -226,7 +234,7 @@ public class DetailActivity extends AppCompatActivity
                 SunshineWeatherUtils.formatTemperature(this,
                         data.getDouble(INDEX_SELECTED_WEATHER_MAX_TEMP))
         );
-        mWeatherHigh.setText(displayHigh);
+        mWeatherHighView.setText(displayHigh);
 
         //  TODO completed (29) Display the low temperature
         String displayLow = getResources().getString(
@@ -234,7 +242,7 @@ public class DetailActivity extends AppCompatActivity
                 SunshineWeatherUtils.formatTemperature(this,
                         data.getDouble(INDEX_SELECTED_WEATHER_MIN_TEMP))
         );
-        mWeatherLow.setText(displayLow);
+        mWeatherLowView.setText(displayLow);
 
         //  TODO completed (30) Display the humidity
         String displayHumidity = getResources().getString(
@@ -243,7 +251,7 @@ public class DetailActivity extends AppCompatActivity
                         R.string.format_humidity,
                         data.getDouble(INDEX_SELECTED_WEATHER_HUMIDITY))
         );
-        mWeatherHumidity.setText(displayHumidity);
+        mWeatherHumidityView.setText(displayHumidity);
 
         //  TODO completed (31) Display the wind speed and direction
         String displayWindSpeedAndDirection = getResources().getString(
@@ -253,14 +261,16 @@ public class DetailActivity extends AppCompatActivity
                         data.getFloat(INDEX_SELECTED_WEATHER_WIND_SPEED),
                         data.getFloat(INDEX_SELECTED_WEATHER_WIND_DEGREES))
         );
-        mWeatherWind.setText(displayWindSpeedAndDirection);
+        mWeatherWindView.setText(displayWindSpeedAndDirection);
 
         //  TODO completed (32) Display the pressure
         String displayPressure = getResources().getString(
-                R.string.format_pressure,
-                data.getDouble(INDEX_SELECTED_WEATHER_PRESSURE)
+                R.string.a11y_pressure,
+                getResources().getString(
+                        R.string.format_pressure,
+                        data.getDouble(INDEX_SELECTED_WEATHER_PRESSURE))
         );
-        mWeatherPressure.setText(displayPressure);
+        mWeatherPressureView.setText(displayPressure);
 
 
         //  TODO completed (33) Store a forecast summary in mForecastSummary
@@ -272,7 +282,7 @@ public class DetailActivity extends AppCompatActivity
                 displayWindSpeedAndDirection + "\n" +
                 displayPressure;
 
-        Toast.makeText(this, mForecastSummary, Toast.LENGTH_SHORT).show();// TODO: 6/23/18
+//  Toast.makeText(this, mForecastSummary, Toast.LENGTH_SHORT).show();// TODO completed: 6/23/18
 
     }
 

@@ -163,7 +163,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         ForecastAdapterViewHolder(View view) {
             super(view);
 
-            weatherSummary = (TextView) view.findViewById(R.id.tv_weather_data);
+            weatherSummary = view.findViewById(R.id.tv_weather_data);
 
             view.setOnClickListener(this);
         }
@@ -178,6 +178,8 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         @Override
         public void onClick(View v) {
             //  TODO completed (37) Instead of passing the String for the clicked item, pass the date from the cursor
+            // TODO: 6/23/18 completed Without this, it always showed the detail for the last available date
+            mCursor.moveToPosition(getAdapterPosition());
             long weatherDate = mCursor.getLong(MainActivity.INDEX_WEATHER_DATE);
             mClickHandler.onClick(weatherDate);
         }

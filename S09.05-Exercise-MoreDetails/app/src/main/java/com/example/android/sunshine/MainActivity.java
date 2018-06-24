@@ -269,7 +269,9 @@ public class MainActivity extends AppCompatActivity implements
         Context context = this;
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        Uri data = Uri.parse(SunshineDateUtils.getFriendlyDateString(context, weatherDate, true));
+//        Uri data = Uri.parse(SunshineDateUtils.getFriendlyDateString(context, weatherDate, true));
+        // TODO: 6/23/18 completed This was a key fix
+        Uri data = WeatherContract.WeatherEntry.buildWeatherUriWithDate(weatherDate);
         intentToStartDetailActivity.setData(data);
         startActivity(intentToStartDetailActivity);
     }
