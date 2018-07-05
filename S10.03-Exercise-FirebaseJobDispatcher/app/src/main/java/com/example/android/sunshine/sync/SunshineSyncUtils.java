@@ -20,8 +20,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.util.TimeUtils;
 
 import com.example.android.sunshine.data.WeatherContract;
+import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.Driver;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -29,12 +31,16 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 
+import java.util.concurrent.TimeUnit;
+
 public class SunshineSyncUtils {
 
     //  TODO completed (10) Add constant values to sync Sunshine every 3 - 4 hours
     private static final int REFRESH_TIME_IN_HOURS = 3;
-    private static final int REFRESH_TIME_IN_SECONDS = REFRESH_TIME_IN_HOURS * 60 * 60;
-    private static final int REFRESH_WINDOW = 300;
+    //    private static final int REFRESH_TIME_IN_SECONDS = REFRESH_TIME_IN_HOURS * 60 * 60;
+    private static final int REFRESH_TIME_IN_SECONDS =
+            (int) TimeUnit.HOURS.toSeconds(REFRESH_TIME_IN_HOURS);
+    private static final int REFRESH_WINDOW = (int) TimeUnit.HOURS.toSeconds(1);
     private static boolean sInitialized;
 
     //  TODO completed (11) Add a sync tag to identify our sync job
@@ -48,6 +54,7 @@ public class SunshineSyncUtils {
                 .setService(SunshineFirebaseJobService.class)
                 .setTag(SYNC_JOB_TAG)
                 .setLifetime(Lifetime.FOREVER)
+                .setConstraints(Constraint.ON_ANY_NETWORK)
                 .setRecurring(true)
                 .setTrigger(Trigger.executionWindow(REFRESH_TIME_IN_SECONDS,
                         REFRESH_TIME_IN_SECONDS + REFRESH_WINDOW))

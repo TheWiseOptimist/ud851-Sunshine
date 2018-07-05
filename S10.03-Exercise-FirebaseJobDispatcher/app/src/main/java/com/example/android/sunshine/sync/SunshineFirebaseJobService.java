@@ -26,23 +26,28 @@ import com.firebase.jobdispatcher.JobService;
 public class SunshineFirebaseJobService extends JobService {
 
     //  TODO completed (4) Declare an ASyncTask field called mFetchWeatherTask
-    AsyncTask mFetchWeatherTask;
+    private AsyncTask<Void, Void, Void> mFetchWeatherTask;
     Context context = getApplicationContext();
 
     //  TODO completed (5) Override onStartJob and within it, spawn off a separate ASyncTask to sync weather data
     @Override
     public boolean onStartJob(final JobParameters job) {
 
-        mFetchWeatherTask = new AsyncTask() {
+        mFetchWeatherTask = new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Object doInBackground(Object[] objects) {
+            protected Void doInBackground(Void... voids) {
                 SunshineSyncTask.syncWeather(context);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
                 //  TODO completed (6) Once the weather data is sync'd, call jobFinished with the appropriate arguments
-                jobFinished(job,false); // no more work to do
-                return false;
+                jobFinished(job, false);
             }
         };
-        return false;  // Is the work still going on?
+        mFetchWeatherTask.execute();
+        return true;  // Is the work still going on?
     }
 
     //  TODO completed (7) Override onStopJob, cancel the ASyncTask if it's not null and return true
