@@ -38,6 +38,7 @@ public final class NetworkUtils {
     /*
      * Sunshine was originally built to use OpenWeatherMap's API. However, we wanted to provide
      * a way to much more easily test the app and provide more varied weather data. After all, in
+     *
      * Mountain View (Google's HQ), it gets very boring looking at a forecast of perfectly clear
      * skies at 75°F every day... (UGH!) The solution we came up with was to host our own fake
      * weather server. With this server, there are two URL's you can use. The first (and default)
@@ -48,13 +49,16 @@ public final class NetworkUtils {
      * If you'd prefer to test with the weather data that you will see in the videos on Udacity,
      * you can do so by setting the FORECAST_BASE_URL to STATIC_WEATHER_URL below.
      */
-    private static final String DYNAMIC_WEATHER_URL =
-            "https://andfun-weather.udacity.com/weather";
+//    private static final String DYNAMIC_WEATHER_URL =
+//            "https://andfun-weather.udacity.com/weather";
+//
+//    private static final String STATIC_WEATHER_URL =
+//            "https://andfun-weather.udacity.com/staticweather";
+    private static final String OWM_16DAY_WEATHER_URL =
+            "http://api.openweathermap.org/data/2.5/forecast/daily";
 
-    private static final String STATIC_WEATHER_URL =
-            "https://andfun-weather.udacity.com/staticweather";
-
-    private static final String FORECAST_BASE_URL = STATIC_WEATHER_URL;
+    //    private static final String FORECAST_BASE_URL = STATIC_WEATHER_URL;
+    private static final String FORECAST_BASE_URL = OWM_16DAY_WEATHER_URL;
 
     /*
      * NOTE: These values only effect responses from OpenWeatherMap, NOT from the fake weather
@@ -68,7 +72,10 @@ public final class NetworkUtils {
     /* The units we want our API to return */
     private static final String units = "metric";
     /* The number of days we want our API to return */
-    private static final int numDays = 14;
+//    private static final int numDays = 14; // TODO: 7/4/18
+    private static final int numDays = 16;
+    private static final String appId = "b4565f4409c46a000a99340410117f4a";
+
 
     /* The query parameter allows us to provide a location string to the API */
     private static final String QUERY_PARAM = "q";
@@ -82,6 +89,7 @@ public final class NetworkUtils {
     private static final String UNITS_PARAM = "units";
     /* The days parameter allows us to designate how many days of weather data we want */
     private static final String DAYS_PARAM = "cnt";
+    private static final String APPID_PARAM = "appid";
 
     /**
      * Retrieves the proper URL to query for the weather data. The reason for both this method as
@@ -124,6 +132,7 @@ public final class NetworkUtils {
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                .appendQueryParameter(APPID_PARAM, appId)
                 .build();
 
         try {
@@ -149,6 +158,7 @@ public final class NetworkUtils {
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                .appendQueryParameter(APPID_PARAM, appId)
                 .build();
 
         try {
