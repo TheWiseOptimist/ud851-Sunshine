@@ -18,6 +18,7 @@ package com.example.android.sunshine.sync;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.android.sunshine.data.WeatherContract;
@@ -25,25 +26,34 @@ import com.example.android.sunshine.data.WeatherContract;
 
 public class SunshineSyncUtils {
 
-    //  TODO completed (1) Declare a private static boolean field called sInitialized
+    //  completed TODO (1) Declare a private static boolean field called sInitialized
     private static boolean sInitialized;
 
     //  TODO completed (2) Create a synchronized public static void method called initialize
-    synchronized public static void initialize(Context context) {
+    synchronized public static void initialize(final Context context) {
 
         //  TODO completed (3) Only execute this method body if sInitialized is false
         if (sInitialized) return;
-        //  TODO completed (4) If the method body is executed, set sInitialized to true
+
+        //  TODO (5) Check to see if our weather ContentProvider is empty
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Cursor cursor = context.getContentResolver().query(
+                        WeatherContract.WeatherEntry.CONTENT_URI,
+                        new String[]{WeatherContract.WeatherEntry._ID},
+                        WeatherContract.WeatherEntry.getSqlSelectForTodayOnwards(),
+                        null,
+                        null);
+                //  TODO (6) If it is empty or we have a null Cursor, sync the weather now!
+                if (cursor.getCount() == 0 || cursor == null) startImmediateSync(context);
+                cursor.close(); // I forgot to do this.
+                return null;
+            }
+        }.execute();
+        //  TODO (4) If the method body is executed, set sInitialized to true
         sInitialized = true;
-        //  TODO completed (5) Check to see if our weather ContentProvider is empty
-        Cursor cursor = context.getContentResolver().query(
-                WeatherContract.WeatherEntry.CONTENT_URI,
-                new String[]{WeatherContract.WeatherEntry._ID},  // projection - don't need to check all columns
-                WeatherContract.WeatherEntry.getSqlSelectForTodayOnwards(), // selection
-                null,
-                null);
-        //  TODO completed (6) If it is empty or we have a null Cursor, sync the weather now!
-        if (cursor.getCount() == 0 || cursor == null) startImmediateSync(context);
     }
 
     /**
