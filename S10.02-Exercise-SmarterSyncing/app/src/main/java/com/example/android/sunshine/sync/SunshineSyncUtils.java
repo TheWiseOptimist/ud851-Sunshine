@@ -35,7 +35,7 @@ public class SunshineSyncUtils {
         //  TODO completed (3) Only execute this method body if sInitialized is false
         if (sInitialized) return;
 
-        //  TODO (5) Check to see if our weather ContentProvider is empty
+        //  TODO completed (5) Check to see if our weather ContentProvider is empty
         new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -46,13 +46,13 @@ public class SunshineSyncUtils {
                         WeatherContract.WeatherEntry.getSqlSelectForTodayOnwards(),
                         null,
                         null);
-                //  TODO (6) If it is empty or we have a null Cursor, sync the weather now!
+                //  TODO completed (6) If it is empty or we have a null Cursor, sync the weather now!
                 if (cursor.getCount() == 0 || cursor == null) startImmediateSync(context);
                 cursor.close(); // I forgot to do this.
                 return null;
             }
         }.execute();
-        //  TODO (4) If the method body is executed, set sInitialized to true
+        //  TODO (completed 4) If the method body is executed, set sInitialized to true
         sInitialized = true;
     }
 
