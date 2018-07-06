@@ -53,13 +53,13 @@ public final class NetworkUtils {
 
     private static final String STATIC_WEATHER_URL =
             "https://andfun-weather.udacity.com/staticweather";
-    private static final String OWM_16DAY_WEATHER_URL =
-            "http://api.openweathermap.org/data/2.5/forecast/daily";
+    private static final String OWM_16DAY_WEATHER_URL =  // TODO: 7/5/18 need for OWM
+            "http://api.openweathermap.org/data/2.5/forecast/daily";  // TODO: 7/5/18 need for OWM
 
-//        private static final String FORECAST_BASE_URL = STATIC_WEATHER_URL;
-    private static final String FORECAST_BASE_URL = OWM_16DAY_WEATHER_URL;
-    private static final String appId = "b4565f4409c46a000a99340410117f4a";
-    private static final String APPID_PARAM = "appid";
+//    private static final String FORECAST_BASE_URL = STATIC_WEATHER_URL;  // TODO: 7/5/18 comment for OWM
+    private static final String FORECAST_BASE_URL = OWM_16DAY_WEATHER_URL;  // TODO: 7/5/18 need for OWM
+    private static final String appId = "b4565f4409c46a000a99340410117f4a";  // TODO: 7/5/18 need for OWM
+    private static final String APPID_PARAM = "appid";  // TODO: 7/5/18 need for OWM
 
     /*
      * NOTE: These values only effect responses from OpenWeatherMap, NOT from the fake weather
@@ -129,7 +129,7 @@ public final class NetworkUtils {
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
-                .appendQueryParameter(APPID_PARAM, appId)
+                .appendQueryParameter(APPID_PARAM, appId)  // TODO: 7/5/18 need for OWM
                 .build();
 
         try {
@@ -155,7 +155,7 @@ public final class NetworkUtils {
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
-                .appendQueryParameter(APPID_PARAM, appId)
+                .appendQueryParameter(APPID_PARAM, appId)  // TODO: 7/5/18 need for OWM
                 .build();
 
         try {
