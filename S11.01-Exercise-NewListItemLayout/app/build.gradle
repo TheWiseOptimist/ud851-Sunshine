@@ -28,7 +28,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:preference-v7:27.1.1'
 
-//  TODO (1) Add the ConstraintLayout dependency to your project
+//  TODO completed (1) Add the ConstraintLayout dependency to your project
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
