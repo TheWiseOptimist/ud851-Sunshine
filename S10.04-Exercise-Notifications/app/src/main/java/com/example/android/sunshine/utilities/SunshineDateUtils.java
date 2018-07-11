@@ -242,7 +242,9 @@ public final class SunshineDateUtils {
                  * https://developer.android.com/reference/android/text/format/DateFormat.html#getBestDateTimePattern
                  */
                 String localizedDayName = new SimpleDateFormat("EEEE").format(localDate);
+
                 return readableDate.replace(localizedDayName, dayName);
+
             } else {
                 return readableDate;
             }

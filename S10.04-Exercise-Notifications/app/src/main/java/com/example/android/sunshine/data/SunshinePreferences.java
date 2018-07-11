@@ -37,9 +37,9 @@ public final class SunshinePreferences {
      * <p>
      * When the location details are updated, the database should to be cleared.
      *
-     * @param context  Context used to get the SharedPreferences
-     * @param lat      the latitude of the city
-     * @param lon      the longitude of the city
+     * @param context Context used to get the SharedPreferences
+     * @param lat     the latitude of the city
+     * @param lon     the longitude of the city
      */
     public static void setLocationDetails(Context context, double lat, double lon) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -127,7 +127,7 @@ public final class SunshinePreferences {
          * into the double itself.
          */
         preferredCoordinates[0] = Double
-                 .longBitsToDouble(sp.getLong(PREF_COORD_LAT, Double.doubleToRawLongBits(0.0)));
+                .longBitsToDouble(sp.getLong(PREF_COORD_LAT, Double.doubleToRawLongBits(0.0)));
         preferredCoordinates[1] = Double
                 .longBitsToDouble(sp.getLong(PREF_COORD_LONG, Double.doubleToRawLongBits(0.0)));
 
@@ -191,7 +191,7 @@ public final class SunshinePreferences {
      * @param context Used to access SharedPreferences as well as use other utility methods
      * @return Elapsed time in milliseconds since the last notification was shown
      */
-    public static long getEllapsedTimeSinceLastNotification(Context context) {
+    public static long getElapsedTimeSinceLastNotification(Context context) {
         long lastNotificationTimeMillis =
                 SunshinePreferences.getLastNotificationTimeInMillis(context);
         long timeSinceLastNotification = System.currentTimeMillis() - lastNotificationTimeMillis;
@@ -202,7 +202,7 @@ public final class SunshinePreferences {
      * Saves the time that a notification is shown. This will be used to get the ellapsed time
      * since a notification was shown.
      *
-     * @param context Used to access SharedPreferences
+     * @param context            Used to access SharedPreferences
      * @param timeOfNotification Time of last notification to save (in UNIX time)
      */
     public static void saveLastNotificationTime(Context context, long timeOfNotification) {
@@ -211,5 +211,13 @@ public final class SunshinePreferences {
         String lastNotificationKey = context.getString(R.string.pref_last_notification);
         editor.putLong(lastNotificationKey, timeOfNotification);
         editor.apply();
+    }
+
+    public static boolean notificationsAreEnabled(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean(
+                context.getString(R.string.pref_enable_notifications_key),
+                context.getResources().getBoolean(R.bool.show_notifications)
+        );
     }
 }

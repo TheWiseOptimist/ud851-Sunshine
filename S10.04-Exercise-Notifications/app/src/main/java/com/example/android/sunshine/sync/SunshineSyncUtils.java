@@ -21,6 +21,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.Driver;
@@ -48,6 +49,7 @@ public class SunshineSyncUtils {
 
     /**
      * Schedules a repeating sync of Sunshine's weather data using FirebaseJobDispatcher.
+     *
      * @param context Context used to create the GooglePlayDriver that powers the
      *                FirebaseJobDispatcher
      */
@@ -99,6 +101,7 @@ public class SunshineSyncUtils {
         /* Schedule the Job with the dispatcher */
         dispatcher.schedule(syncSunshineJob);
     }
+
     /**
      * Creates periodic sync tasks and checks to see if an immediate sync is required. If an
      * immediate sync is required, this method will take care of making sure that sync occurs.

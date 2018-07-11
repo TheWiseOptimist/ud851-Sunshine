@@ -167,7 +167,7 @@ public final class SunshinePreferences {
         String displayNotificationsKey = context.getString(R.string.pref_enable_notifications_key);
 
         /*
-         * In Sunshine, the user has the ability to say whether she would like notifications
+         * In Sunshine, the user has the ability to say whether he would like notifications
          * enabled or not. If no preference has been chosen, we want to be able to determine
          * whether or not to show them. To do this, we reference a bool stored in bools.xml.
          */
@@ -221,7 +221,7 @@ public final class SunshinePreferences {
      * @param context Used to access SharedPreferences as well as use other utility methods
      * @return Elapsed time in milliseconds since the last notification was shown
      */
-    public static long getEllapsedTimeSinceLastNotification(Context context) {
+    public static long getElapsedTimeSinceLastNotification(Context context) {
         long lastNotificationTimeMillis =
                 SunshinePreferences.getLastNotificationTimeInMillis(context);
         long timeSinceLastNotification = System.currentTimeMillis() - lastNotificationTimeMillis;

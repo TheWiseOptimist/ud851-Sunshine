@@ -29,6 +29,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
 import com.example.android.sunshine.utilities.SunshineWeatherUtils;
@@ -94,20 +95,21 @@ public class DetailActivity extends AppCompatActivity implements
     private TextView mHumidityView;
     private TextView mWindView;
     private TextView mPressureView;
+    private TextView mLastUpdateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mDateView = (TextView) findViewById(R.id.date);
-        mDescriptionView = (TextView) findViewById(R.id.weather_description);
-        mHighTemperatureView = (TextView) findViewById(R.id.high_temperature);
-        mLowTemperatureView = (TextView) findViewById(R.id.low_temperature);
-        mHumidityView = (TextView) findViewById(R.id.humidity);
-        mWindView = (TextView) findViewById(R.id.wind);
-        mPressureView = (TextView) findViewById(R.id.pressure);
-
+        mDateView = findViewById(R.id.date);
+        mDescriptionView = findViewById(R.id.weather_description);
+        mHighTemperatureView = findViewById(R.id.high_temperature);
+        mLowTemperatureView = findViewById(R.id.low_temperature);
+        mHumidityView = findViewById(R.id.humidity);
+        mWindView = findViewById(R.id.wind);
+        mPressureView = findViewById(R.id.pressure);
+        mLastUpdateView = findViewById(R.id.last_update);
 
 
         mUri = getIntent().getData();
@@ -121,10 +123,8 @@ public class DetailActivity extends AppCompatActivity implements
      * This is where we inflate and set up the menu for this Activity.
      *
      * @param menu The options menu in which you place your items.
-     *
      * @return You must return true for the menu to be displayed;
-     *         if you return false it will not be shown.
-     *
+     * if you return false it will not be shown.
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
@@ -144,7 +144,6 @@ public class DetailActivity extends AppCompatActivity implements
      * DetailActivity's parent Activity in the AndroidManifest.
      *
      * @param item The menu item that was selected by the user
-     *
      * @return true if you handle the menu click here, false otherwise
      */
     @Override
@@ -187,9 +186,8 @@ public class DetailActivity extends AppCompatActivity implements
     /**
      * Creates and returns a CursorLoader that loads the data for our URI and stores it in a Cursor.
      *
-     * @param loaderId The loader ID for which we need to create a loader
+     * @param loaderId   The loader ID for which we need to create a loader
      * @param loaderArgs Any arguments supplied by the caller
-     *
      * @return A new Loader instance that is ready to start loading.
      */
     @Override
@@ -345,6 +343,15 @@ public class DetailActivity extends AppCompatActivity implements
         /* Store the forecast summary String in our forecast summary field to share later */
         mForecastSummary = String.format("%s - %s - %s/%s",
                 dateText, description, highString, lowString);
+
+        long lastUpdate = SunshinePreferences.getLastNotificationTimeInMillis(this);// TODO: 7/5/18
+//        lastUpdate = System.currentTimeMillis();
+//        String dateString = SunshineDateUtils.getFriendlyDateString(
+//                this,
+//                SunshineDateUtils.normalizeDate(lastUpdate),
+//                true);
+        String dateString = String.valueOf(SunshineDateUtils.normalizeDate(lastUpdate));
+        mLastUpdateView.setText(dateString);
     }
 
     /**

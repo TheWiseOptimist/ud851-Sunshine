@@ -89,7 +89,7 @@ public class SunshineSyncTask {
                  * it's important that you shouldn't spam your users with notifications.
                  */
                 long timeSinceLastNotification = SunshinePreferences
-                        .getEllapsedTimeSinceLastNotification(context);
+                        .getElapsedTimeSinceLastNotification(context);
 
                 boolean oneDayPassedSinceLastNotification = false;
 

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +27,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Saturday, September 24"/>
+        tools:text="Saturday, September 24" />
 
     <!-- Text that describes weather condition -->
     <TextView
@@ -36,7 +35,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Rainy"/>
+        tools:text="Rainy" />
 
     <!-- High temperature for today -->
     <TextView
@@ -44,7 +43,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="19\u00b0"/>
+        tools:text="19\u00b0" />
 
     <!-- Low temperature for today -->
     <TextView
@@ -52,7 +51,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="10\u00b0"/>
+        tools:text="10\u00b0" />
 
     <!-- Humidity  -->
     <TextView
@@ -60,7 +59,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="38%"/>
+        tools:text="38%" />
 
     <!-- Pressure  -->
     <TextView
@@ -68,7 +67,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="995 hPa"/>
+        tools:text="995 hPa" />
 
     <!-- Wind  -->
     <TextView
@@ -76,6 +75,13 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="4km/h NW"/>
+        tools:text="4km/h NW" />
+
+    <!--Update-->
+    <TextView
+        android:id="@+id/last_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pref_last_notification" />
 
 </LinearLayout>
