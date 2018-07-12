@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,5 +16,6 @@
 
 <resources>
     <bool name="show_notifications_by_default">true</bool>
-    <!-- TODO (3) Add a bool called use_today_layout and set it to false -->
+    <!-- TODO completed (3) Add a bool called use_today_layout and set it to false -->
+    <bool name="use_today_layout">false</bool>
 </resources>
