@@ -143,6 +143,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         int weatherImageId;
 
         //  TODO completed (15) If the view type of the layout is today, display a large icon
+        //  class solution uses getItemViewType(position), but I seem to get the same results
         if (forecastAdapterViewHolder.getItemViewType() == VIEW_TYPE_TODAY) {
             weatherImageId = SunshineWeatherUtils
                     .getLargeArtResourceIdForWeatherCondition(weatherId);
