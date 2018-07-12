@@ -117,13 +117,21 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         long dateInMillis = mCursor.getLong(MainActivity.INDEX_WEATHER_DATE);
         /* Get human readable string using our utility method */
         String dateString = SunshineDateUtils.getFriendlyDateString(mContext, dateInMillis, false);
+        String dateA11y = mContext.getString(R.string.a11y_date, dateString);
         /* Use the weatherId to obtain the proper description */
         int weatherId = mCursor.getInt(MainActivity.INDEX_WEATHER_CONDITION_ID);
         String description = SunshineWeatherUtils.getStringForWeatherCondition(mContext, weatherId);
+        String descriptionA11y = mContext.getString(R.string.a11y_forecast, description);
+        int weatherIcon = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId);
+        String weatherIconA11y = mContext.getString(R.string.a11y_forecast_icon, description);
         /* Read high temperature from the cursor (in degrees celsius) */
         double highInCelsius = mCursor.getDouble(MainActivity.INDEX_WEATHER_MAX_TEMP);
+        String maxTemp = SunshineWeatherUtils.formatTemperature(mContext, highInCelsius);
+        String maxTempA11y = mContext.getString(R.string.a11y_high_temp, maxTemp);
         /* Read low temperature from the cursor (in degrees celsius) */
         double lowInCelsius = mCursor.getDouble(MainActivity.INDEX_WEATHER_MIN_TEMP);
+        String minTemp = SunshineWeatherUtils.formatTemperature(mContext, lowInCelsius);
+        String minTempA11y = mContext.getString(R.string.a11y_low_temp, minTemp);
 
         String highAndLowTemperature =
                 SunshineWeatherUtils.formatHighLows(mContext, highInCelsius, lowInCelsius);
@@ -132,13 +140,15 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 
 //        forecastAdapterViewHolder.weatherSummary.setText(weatherSummary);
         forecastAdapterViewHolder.tvWeatherDate.setText(dateString);
-        forecastAdapterViewHolder.tvWeatherMaxTemp.setText(
-                SunshineWeatherUtils.formatTemperature(mContext, highInCelsius));
-        forecastAdapterViewHolder.tvWeatherMinTemp.setText(
-                SunshineWeatherUtils.formatTemperature(mContext, lowInCelsius));
+        forecastAdapterViewHolder.tvWeatherDate.setContentDescription(dateA11y);
+        forecastAdapterViewHolder.tvWeatherMaxTemp.setText(maxTemp);
+        forecastAdapterViewHolder.tvWeatherMaxTemp.setContentDescription(maxTempA11y);
+        forecastAdapterViewHolder.tvWeatherMinTemp.setText(minTemp);
+        forecastAdapterViewHolder.tvWeatherMinTemp.setContentDescription(minTempA11y);
         forecastAdapterViewHolder.tvWeatherDescription.setText(description);
-        forecastAdapterViewHolder.ivWeatherIcon.setImageResource(
-                SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId));
+        forecastAdapterViewHolder.tvWeatherDescription.setContentDescription(descriptionA11y);
+        forecastAdapterViewHolder.ivWeatherIcon.setImageResource(weatherIcon);
+        forecastAdapterViewHolder.ivWeatherIcon.setContentDescription(weatherIconA11y);
     }
 
     /**
