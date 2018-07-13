@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--Instead of using this file, I just re-used the list_item_forecast_today.xml file, as-->
+        <!--it did the exact same thing.-->
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+
+    <!-- TODO completed (25) Create a layout called primary_weather_info.xml -->
+
+    <!-- TODO completed (26) Surround the entire layout with <layout/> tags for data binding -->
+
+    <!-- TODO completed (27) Using ConstraintLayout, create the primary weather info layout -->
