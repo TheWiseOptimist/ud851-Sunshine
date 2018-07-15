@@ -273,7 +273,6 @@ public class DetailActivity extends AppCompatActivity implements
 
 //      TODO completed (8) Use mDetailBinding to display the date
         mDetailBinding.primaryInfo.date.setText(dateText);
-//        mDetailBinding.date.setText(dateText); // TODO: 7/12/18
 
         /***********************
          * Weather Description *
@@ -289,7 +288,6 @@ public class DetailActivity extends AppCompatActivity implements
          * Weather Icon  *
          ****************/
 
-//        mDetailBinding.weatherIcon.setImageResource(// TODO: 7/12/18
 //                SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId));
         mDetailBinding.primaryInfo.weatherIcon.setImageResource(
                 SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId));
@@ -299,7 +297,6 @@ public class DetailActivity extends AppCompatActivity implements
 
         //  TODO completed (9) Use mDetailBinding to display the description and set the content description
         /* Set the text to display the description*/
-//        mDetailBinding.weatherDescription.setText(description);// TODO: 7/12/18
         mDetailBinding.primaryInfo.weatherDescription.setText(description);
         //  TODO completed (16) Set the content description of the icon to the same as the weather description a11y text
         mDetailBinding.primaryInfo.weatherDescription.setContentDescription(a11ydescription);
@@ -320,7 +317,6 @@ public class DetailActivity extends AppCompatActivity implements
         String a11yHigh = this.getString(R.string.a11y_high_temp, highString);
         //  TODO completed (10) Use mDetailBinding to display the high temperature and set the content description
         /* Set the text to display the high temperature */
-//        mDetailBinding.highTemperature.setText(highString);// TODO: 7/12/18
         mDetailBinding.primaryInfo.highTemperature.setText(highString);
         mDetailBinding.primaryInfo.highTemperature.setContentDescription(a11yHigh);
 
@@ -340,7 +336,6 @@ public class DetailActivity extends AppCompatActivity implements
         String a11yLow = this.getString(R.string.a11y_low_temp, lowString);
         //  TODO completed (11) Use mDetailBinding to display the low temperature and set the content description
         /* Set the text to display the low temperature */
-//        mDetailBinding.lowTemperature.setText(lowString);// TODO: 7/12/18
         mDetailBinding.primaryInfo.lowTemperature.setText(lowString);
         mDetailBinding.primaryInfo.lowTemperature.setContentDescription(a11yLow);
 
