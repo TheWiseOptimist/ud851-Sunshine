@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,21 +14,27 @@
      limitations under the License.
 -->
 <resources>
-    <!-- COMPLETED (1) Add each of the colors required by Sunshine -->
-    <color name="colorPrimary">#03A9F4</color>
-    <color name="colorPrimaryDark">#0288D1</color>
-    <color name="colorAccent">#FFD740</color>
-    <color name="colorPrimaryLight">#B3E5FC</color>
+    <!-- TODO completed (1) Add each of the colors required by Sunshine -->
+    <!--LightBlue 100-->
+    <color name="colorPrimaryLight">#b3e5fc</color>
+    <!--LightBlue 500-->
+    <color name="colorPrimary">#03a9f4</color>
+    <!--LightBlue 700-->
+    <color name="colorPrimaryDark">#0288d1</color>
+    <!--Amber A200-->
+    <color name="colorAccent">#ffd740</color>
+    <!--White-->
+    <color name="white">#ffffff</color>
 
-    <color name="white">#FFFFFF</color>
-
+    <!--Grey 900-->
     <color name="primary_text">#212121</color>
+    <!--Close to Grey 600-->
     <color name="secondary_text">#727272</color>
+    <!--BlueGrey 700-->
+    <color name="detail_accent_pane_background">#455a64</color>
+    <!--BlueGrey 300-->
+    <color name="detail_accent_label">#90a4ae</color>
+    <!--Grey 300-->
+    <color name="activated">#e0e0e0</color>
 
-     <!--our detail accent colors -->
-    <color name="detail_accent_pane_background">#455A64</color>
-    <color name="detail_accent_label">#90A4AE</color>
-
-    <!-- the activated state color for a forecast list item -->
-    <color name="activated">#E0E0E0</color>
 </resources>
