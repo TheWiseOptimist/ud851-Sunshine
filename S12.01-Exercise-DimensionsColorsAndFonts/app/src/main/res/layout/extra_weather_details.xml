@@ -12,12 +12,11 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
-<!-- TODO completed (4) Color the background and label text color appropriately -->
+--><!-- TODO completed (4) Color the background and label text color appropriately -->
 
 <!-- TODO completed (5) Replace dimension values with @dimen resources -->
 
-<!-- TODO (6) Use sans-serif font family for label TextViews -->
+<!-- TODO completed (6) Use sans-serif font family for label TextViews -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -47,6 +46,7 @@
             android:id="@+id/humidity_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:text="@string/humidity_label"
             android:textColor="@color/detail_accent_label"
             app:layout_constraintBottom_toTopOf="@+id/pressure_label"
@@ -69,6 +69,7 @@
             android:id="@+id/pressure_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:text="@string/pressure_label"
             android:textColor="@color/detail_accent_label"
             app:layout_constraintBottom_toBottomOf="@+id/extra_details"
@@ -90,6 +91,7 @@
             android:id="@+id/wind_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:text="@string/wind_label"
             android:textColor="@color/detail_accent_label"
             app:layout_constraintBottom_toBottomOf="@+id/extra_details"
