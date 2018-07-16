@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,20 +14,21 @@
      limitations under the License.
 -->
 
-<!-- TODO (7) Color the primary and secondary text appropriately -->
+<!-- TODO completed (7) Color the primary and secondary text appropriately -->
+
 <!-- TODO (8) Replace dimension values with @dimen resources -->
+
 <!-- TODO (9) Use sans-serif-light font family for the temperature TextViews -->
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingBottom="12dp"
     android:paddingLeft="16dp"
+    android:paddingTop="12dp"
     android:paddingRight="16dp"
-    android:paddingTop="12dp">
+    android:paddingBottom="12dp">
 
     <ImageView
         android:id="@+id/weather_icon"
@@ -37,27 +37,29 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        tools:src="@drawable/art_clouds"/>
+        tools:src="@drawable/art_clouds" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/primary_text"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintLeft_toRightOf="@+id/weather_icon"
-        tools:text="Today, April 03"/>
+        tools:text="Today, April 03" />
 
     <TextView
         android:id="@+id/weather_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/secondary_text"
         app:layout_constraintLeft_toLeftOf="@+id/date"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        tools:text="Rainy"/>
+        tools:text="Rainy" />
 
     <TextView
         android:id="@+id/high_temperature"
@@ -65,28 +67,30 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
+        android:textColor="@color/primary_text"
         android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintRight_toLeftOf="@+id/low_temperature"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        tools:text="19\u00b0"/>
+        tools:text="19\u00b0" />
 
     <TextView
         android:id="@+id/low_temperature"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:textColor="@color/secondary_text"
         android:textSize="28dp"
         app:layout_constraintBottom_toBottomOf="@+id/guideline"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        tools:text="10\u00b0"/>
+        tools:text="10\u00b0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.5" />
 
 </android.support.constraint.ConstraintLayout>
