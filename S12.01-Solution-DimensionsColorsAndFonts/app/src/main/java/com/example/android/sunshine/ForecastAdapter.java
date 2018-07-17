@@ -1,3 +1,20 @@
+package com.example.android.sunshine;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.android.sunshine.MainActivity;
+import com.example.android.sunshine.R;
+import com.example.android.sunshine.utilities.SunshineDateUtils;
+import com.example.android.sunshine.utilities.SunshineWeatherUtils;
+
 /*
  * Copyright (C) 2016 The Android Open Source Project
  *
@@ -12,7 +29,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+/*
 package com.example.android.sunshine;
 
 import android.content.Context;
@@ -160,57 +177,57 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         /****************
          * Weather Date *
          ****************/
-         /* Read date from the cursor */
+        /* Read date from the cursor */
         long dateInMillis = mCursor.getLong(MainActivity.INDEX_WEATHER_DATE);
-         /* Get human readable string using our utility method */
+        /* Get human readable string using our utility method */
         String dateString = SunshineDateUtils.getFriendlyDateString(mContext, dateInMillis, false);
 
-         /* Display friendly date string */
+        /* Display friendly date string */
         forecastAdapterViewHolder.dateView.setText(dateString);
 
         /***********************
          * Weather Description *
          ***********************/
         String description = SunshineWeatherUtils.getStringForWeatherCondition(mContext, weatherId);
-         /* Create the accessibility (a11y) String from the weather description */
+        /* Create the accessibility (a11y) String from the weather description */
         String descriptionA11y = mContext.getString(R.string.a11y_forecast, description);
 
-         /* Set the text and content description (for accessibility purposes) */
+        /* Set the text and content description (for accessibility purposes) */
         forecastAdapterViewHolder.descriptionView.setText(description);
         forecastAdapterViewHolder.descriptionView.setContentDescription(descriptionA11y);
 
         /**************************
          * High (max) temperature *
          **************************/
-         /* Read high temperature from the cursor (in degrees celsius) */
+        /* Read high temperature from the cursor (in degrees celsius) */
         double highInCelsius = mCursor.getDouble(MainActivity.INDEX_WEATHER_MAX_TEMP);
-         /*
-          * If the user's preference for weather is fahrenheit, formatTemperature will convert
-          * the temperature. This method will also append either °C or °F to the temperature
-          * String.
-          */
+        /*
+         * If the user's preference for weather is fahrenheit, formatTemperature will convert
+         * the temperature. This method will also append either °C or °F to the temperature
+         * String.
+         */
         String highString = SunshineWeatherUtils.formatTemperature(mContext, highInCelsius);
-         /* Create the accessibility (a11y) String from the weather description */
+        /* Create the accessibility (a11y) String from the weather description */
         String highA11y = mContext.getString(R.string.a11y_high_temp, highString);
 
-         /* Set the text and content description (for accessibility purposes) */
+        /* Set the text and content description (for accessibility purposes) */
         forecastAdapterViewHolder.highTempView.setText(highString);
         forecastAdapterViewHolder.highTempView.setContentDescription(highA11y);
 
         /*************************
          * Low (min) temperature *
          *************************/
-         /* Read low temperature from the cursor (in degrees celsius) */
+        /* Read low temperature from the cursor (in degrees celsius) */
         double lowInCelsius = mCursor.getDouble(MainActivity.INDEX_WEATHER_MIN_TEMP);
-         /*
-          * If the user's preference for weather is fahrenheit, formatTemperature will convert
-          * the temperature. This method will also append either °C or °F to the temperature
-          * String.
-          */
+        /*
+         * If the user's preference for weather is fahrenheit, formatTemperature will convert
+         * the temperature. This method will also append either °C or °F to the temperature
+         * String.
+         */
         String lowString = SunshineWeatherUtils.formatTemperature(mContext, lowInCelsius);
         String lowA11y = mContext.getString(R.string.a11y_low_temp, lowString);
 
-         /* Set the text and content description (for accessibility purposes) */
+        /* Set the text and content description (for accessibility purposes) */
         forecastAdapterViewHolder.lowTempView.setText(lowString);
         forecastAdapterViewHolder.lowTempView.setContentDescription(lowA11y);
     }

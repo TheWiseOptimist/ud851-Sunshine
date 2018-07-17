@@ -59,7 +59,7 @@
             android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/detail_accent_label"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/humidity_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             tools:text="38%" />
@@ -81,7 +81,7 @@
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/detail_accent_label"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/pressure_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             tools:text="995 hPa" />
@@ -104,7 +104,7 @@
             android:id="@+id/wind_measurement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/detail_accent_label"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/wind_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             tools:text="4km/h NW" />
